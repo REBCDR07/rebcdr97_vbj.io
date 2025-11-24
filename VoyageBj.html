@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoyageBJ - Plateforme de Réservation de Transport au Bénin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        primaryDark: '#1d4ed8',
+                        secondary: '#f59e0b',
+                        secondaryLight: '#fbbf24',
+                        accent: '#7c3aed',
+                        dark: '#1f2937',
+                        darker: '#111827',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'typewriter': 'typewriter 2s steps(11) 1s 1 normal both',
+                        'blinkCursor': 'blinkCursor 500ms steps(11) infinite normal',
+                    },
+                    keyframes: {
+                        typewriter: {
+                            from: { width: '0' },
+                            to: { width: '11ch' }
+                        },
+                        blinkCursor: {
+                            from: { 'border-right-color': 'rgba(255,255,255,0.75)' },
+                            to: { 'border-right-color': 'transparent' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid rgba(255,255,255,0.75);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: 
+                typewriter 3.5s steps(40, end),
+                blinkCursor .75s step-end infinite;
+        }
+        
+        .stat-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-globe-africa text-primary text-2xl"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">VoyageBJ</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#features" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Fonctionnalités</a>
+                        <a href="#how-it-works" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Fonctionnement</a>
+                        <a href="#mission" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Notre Mission</a>
+                        <a href="#audience" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Pour Qui?</a>
+                        <a href="#contact" class="text-gray-700 hover:text-primary px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="#features" class="block text-gray-700 hover:text-primary py-2">Fonctionnalités</a>
+            <a href="#how-it-works" class="block text-gray-700 hover:text-primary py-2">Fonctionnement</a>
+            <a href="#mission" class="block text-gray-700 hover:text-primary py-2">Notre Mission</a>
+            <a href="#audience" class="block text-gray-700 hover:text-primary py-2">Pour Qui?</a>
+            <a href="#contact" class="block text-gray-700 hover:text-primary py-2">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Voyagez Sereinement au <span class="text-secondary">Bénin</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100">
+                        La première plateforme digitale qui révolutionne votre expérience de transport. 
+                        Réservez, payez, voyagez - tout en un clic.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <button class="bg-secondary text-gray-900 px-8 py-4 rounded-lg font-bold hover:bg-secondaryLight transition-colors flex items-center justify-center">
+                            Réserver Maintenant
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors flex items-center justify-center">
+                            <i class="fas fa-play mr-2"></i>
+                            Voir la Démo
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <div id="stat1" class="text-2xl font-bold stat-counter" data-target="50">0</div>
+                            <div class="text-sm text-blue-200">Compagnies Partenaires</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat2" class="text-2xl font-bold stat-counter" data-target="25">0</div>
+                            <div class="text-sm text-blue-200">Villes Desservies</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat3" class="text-2xl font-bold stat-counter" data-target="10000">0</div>
+                            <div class="text-sm text-blue-200">Voyageurs Mensuels</div>
+                        </div>
+                        <div class="text-center">
+                            <div id="stat4" class="text-2xl font-bold stat-counter" data-target="98">0</div>
+                            <div class="text-sm text-blue-200">Satisfaction Clients</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Widget -->
+                <div class="bg-white rounded-2xl shadow-2xl p-6 text-gray-900 animate-float">
+                    <h3 class="text-2xl font-bold mb-6 text-center">Trouvez Votre Trajet</h3>
+                    
+                    <form id="search-form">
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Départ</label>
+                                    <div class="relative">
+                                        <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text" placeholder="Ville de départ" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" id="departure">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Arrivée</label>
+                                    <div class="relative">
+                                        <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text" placeholder="Ville d'arrivée" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" id="arrival">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Date</label>
+                                    <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" id="travel-date">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Passagers</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" id="passengers">
+                                        <option value="1">1 passager</option>
+                                        <option value="2">2 passagers</option>
+                                        <option value="3">3 passagers</option>
+                                        <option value="4">4 passagers</option>
+                                        <option value="5">5 passagers</option>
+                                        <option value="6">6 passagers</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg font-bold hover:bg-primaryDark transition-colors flex items-center justify-center">
+                                <i class="fas fa-search mr-2"></i>
+                                Rechercher les Trajets
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section id="mission" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Pourquoi <span class="text-primary">VoyageBJ</span> ?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Nous digitalisons le secteur du transport terrestre béninois pour offrir 
+                    une expérience moderne, sécurisée et efficace à tous les acteurs.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Problème -->
+                <div class="bg-red-50 rounded-2xl p-8 border-l-4 border-red-500 card-hover">
+                    <div class="text-red-500 mb-4">
+                        <i class="fas fa-exclamation-triangle text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Le Défi Actuel</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Processus de réservation archaïque et chronophage</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Manque de transparence sur les prix et horaires</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Insécurité des transactions financières</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-red-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Difficulté à planifier ses voyages à l'avance</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Solution -->
+                <div class="bg-green-50 rounded-2xl p-8 border-l-4 border-green-500 card-hover">
+                    <div class="text-green-500 mb-4">
+                        <i class="fas fa-lightbulb text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Notre Solution</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Plateforme centralisée accessible 24h/24</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Réservation instantanée avec confirmation immédiate</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Paiements sécurisés Mobile Money et cartes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Informations temps réel et notifications</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Impact -->
+                <div class="bg-blue-50 rounded-2xl p-8 border-l-4 border-blue-500 card-hover">
+                    <div class="text-blue-500 mb-4">
+                        <i class="fas fa-chart-line text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Impact Stratégique</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Digitalisation du secteur transport béninois</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Création d'écosystème numérique intégré</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Optimisation des revenus pour les transporteurs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-500 mr-2 mt-1 flex-shrink-0"></i>
+                            <span>Expérience voyageur modernisée et sécurisée</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Additional Content -->
+            <div class="mt-16 bg-gradient-to-r from-primary to-accent rounded-2xl p-8 text-white">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Notre Vision pour le Bénin</h3>
+                        <p class="mb-4">
+                            VoyageBJ s'engage à transformer radicalement le secteur des transports au Bénin en créant 
+                            un écosystème numérique complet qui connecte tous les acteurs : voyageurs, transporteurs, 
+                            et partenaires technologiques.
+                        </p>
+                        <p>
+                            Notre objectif est de faire du Bénin un modèle de digitalisation des transports en Afrique, 
+                            en offrant des solutions innovantes adaptées aux besoins locaux tout en respectant les 
+                            standards internationaux de qualité et de sécurité.
+                        </p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="bg-white rounded-xl p-4 shadow-lg">
+                            <img src="https://via.placeholder.com/400x250/2563eb/ffffff?text=Carte+du+Bénin" alt="Carte du Bénin" class="rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Fonctionnalités <span class="text-primary">Innovantes</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Découvrez notre suite complète d'outils conçus pour révolutionner 
+                    votre expérience de transport
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-clock text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Réservation Instantanée</h3>
+                    <p class="text-gray-600">Réservez vos trajets en temps réel avec confirmation immédiate</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Paiement Sécurisé</h3>
+                    <p class="text-gray-600">Transactions cryptées avec Mobile Money et cartes bancaires</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-map-marker-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Couverture Nationale</h3>
+                    <p class="text-gray-600">Accès à tous les trajets interurbains du Bénin</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="text-primary mb-4">
+                        <i class="fas fa-chart-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Tarifs Optimisés</h3>
+                    <p class="text-gray-600">Meilleurs prix garantis grâce à notre plateforme centralisée</p>
+                </div>
+            </div>
+
+            <!-- Technical Stack -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">
+                    Stack Technologique <span class="text-primary">Avancée</span>
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Frontend Moderne</h4>
+                        <p class="text-gray-600 text-sm">
+                            React 18 + TypeScript + Tailwind CSS<br>
+                            State Management Redux Toolkit<br>
+                            Design System Responsive
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-server text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Backend Robust</h4>
+                        <p class="text-gray-600 text-sm">
+                            Node.js + Express + PostgreSQL<br>
+                            Redis Cache + JWT Auth<br>
+                            API RESTful sécurisée
+                        </p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cloud text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Infrastructure Cloud</h4>
+                        <p class="text-gray-600 text-sm">
+                            Docker + AWS EC2<br>
+                            CI/CD GitHub Actions<br>
+                            Monitoring 24/7
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Features -->
+            <div class="mt-16 grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-primary to-accent rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">Pour les Voyageurs</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Recherche intuitive avec filtres avancés</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Sélection de sièges en temps réel</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Historique des réservations</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Notifications SMS et email</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Support client 7j/7</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-secondary to-orange-500 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">Pour les Transporteurs</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Tableau de bord analytique</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Gestion des trajets et véhicules</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Paiements automatiques sécurisés</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Outils de marketing intégrés</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span>Rapports de performance détaillés</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Comment <span class="text-primary">Ça Marche</span> ?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Un processus simplifié en 4 étapes pour révolutionner votre façon de voyager
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recherche</h3>
+                    <p class="text-gray-600">Trouvez votre trajet avec nos filtres intelligents</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Sélection</h3>
+                    <p class="text-gray-600">Choisissez votre compagnie et vos sièges</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Paiement</h3>
+                    <p class="text-gray-600">Payez sécurisé avec vos moyens préférés</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        4
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Confirmation</h3>
+                    <p class="text-gray-600">Recevez votre e-billet instantanément</p>
+                </div>
+            </div>
+            
+            <!-- Process Visualization -->
+            <div class="mt-16 bg-gray-50 rounded-2xl p-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center mb-8 md:mb-0">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-md mx-auto mb-4">
+                            <i class="fas fa-search text-primary text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Recherche</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-arrow-right text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="block md:hidden my-4">
+                        <i class="fas fa-arrow-down text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="text-center mb-8 md:mb-0">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-md mx-auto mb-4">
+                            <i class="fas fa-check-circle text-primary text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Sélection</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-arrow-right text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="block md:hidden my-4">
+                        <i class="fas fa-arrow-down text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="text-center mb-8 md:mb-0">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-md mx-auto mb-4">
+                            <i class="fas fa-credit-card text-primary text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Paiement</p>
+                    </div>
+                    <div class="hidden md:block">
+                        <i class="fas fa-arrow-right text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="block md:hidden my-4">
+                        <i class="fas fa-arrow-down text-gray-400 text-xl"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-md mx-auto mb-4">
+                            <i class="fas fa-ticket-alt text-primary text-2xl"></i>
+                        </div>
+                        <p class="font-medium">Confirmation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section id="audience" class="py-16 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    Pour <span class="text-secondary">Qui</span> ?
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    VoyageBJ s'adresse à tous les acteurs de l'écosystème transport béninois
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-2xl p-8 text-center card-hover">
+                    <i class="fas fa-users text-secondary text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Voyageurs</h3>
+                    <ul class="text-gray-300 space-y-2 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Réservation 24h/24 depuis smartphone
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Paiements sécurisés multiples
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Notifications temps réel
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Support client dédié
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800 rounded-2xl p-8 text-center card-hover">
+                    <i class="fas fa-bus text-secondary text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Transporteurs</h3>
+                    <ul class="text-gray-300 space-y-2 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Gestion centralisée des trajets
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Analytics performances détaillées
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Paiements automatiques sécurisés
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Augmentation du taux d'occupation
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800 rounded-2xl p-8 text-center card-hover">
+                    <i class="fas fa-chart-line text-secondary text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-4">Écosystème Digital</h3>
+                    <ul class="text-gray-300 space-y-2 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            API ouverte pour intégrations
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Données transport en temps réel
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Partenariats technologiques
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            Innovation continue
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-center mb-8">Ils nous font confiance</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                JD
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Jean D.</h4>
+                                <p class="text-gray-400 text-sm">Voyageur régulier</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">
+                            "VoyageBJ a transformé ma façon de voyager. Plus besoin de me déplacer à la gare à l'avance, je réserve en ligne et j'ai mon billet sur mon téléphone."
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                MT
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Marie T.</h4>
+                                <p class="text-gray-400 text-sm">Directrice de compagnie</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">
+                            "Depuis que nous sommes sur VoyageBJ, notre taux d'occupation a augmenté de 30%. La plateforme nous permet de mieux gérer nos trajets et nos revenus."
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                KA
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Koffi A.</h4>
+                                <p class="text-gray-400 text-sm">Étudiant</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">
+                            "En tant qu'étudiant, les tarifs avantageux et la facilité d'utilisation de VoyageBJ me permettent de rentrer chez moi plus souvent sans me ruiner."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                Prêt à Révolutionner Votre Expérience de Transport ?
+            </h2>
+            <p class="text-xl mb-8 text-blue-100">
+                Rejoignez la première plateforme digitale de réservation de transport au Bénin
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <button class="bg-secondary text-gray-900 px-8 py-4 rounded-lg font-bold hover:bg-secondaryLight transition-colors text-lg">
+                    🚀 Commencer Maintenant - C'est Gratuit
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-primary transition-colors text-lg">
+                    📞 Demo Personnalisée
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-blue-200">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    <span>Paiements 100% Sécurisés</span>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span>Support 7j/7</span>
+                </div>
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>Satisfaction Garantie</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-globe-africa text-primary text-2xl"></i>
+                        <span class="ml-2 text-xl font-bold">VoyageBJ</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        La plateforme digitale qui révolutionne le transport au Bénin
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition-colors">Fonctionnalités</a></li>
+                        <li><a href="#how-it-works" class="hover:text-white transition-colors">Fonctionnement</a></li>
+                        <li><a href="#mission" class="hover:text-white transition-colors">Notre Mission</a></li>
+                        <li><a href="#audience" class="hover:text-white transition-colors">Pour Qui?</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Légal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Politique de confidentialité</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Mentions légales</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            yemalindev2002@gmail.com
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Bénin, Afrique
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-briefcase mr-2"></i>
+                            Rejoindre l'équipe
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2024 VoyageBJ. Tous droits réservés. Développé avec ❤️ pour le Bénin</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Form Submission
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const departure = document.getElementById('departure').value;
+            const arrival = document.getElementById('arrival').value;
+            const date = document.getElementById('travel-date').value;
+            const passengers = document.getElementById('passengers').value;
+            
+            if (!departure || !arrival || !date) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+            
+            // Simulation de recherche
+            alert(`Recherche de trajet:\nDépart: ${departure}\nArrivée: ${arrival}\nDate: ${date}\nPassagers: ${passengers}`);
+        });
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('travel-date').min = today;
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Counter animation for statistics
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString() + (element.id === 'stat4' ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString() + (element.id === 'stat4' ? '%' : '+');
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for counter animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stat1 = document.getElementById('stat1');
+                    const stat2 = document.getElementById('stat2');
+                    const stat3 = document.getElementById('stat3');
+                    const stat4 = document.getElementById('stat4');
+                    
+                    animateCounter(stat1, 50);
+                    animateCounter(stat2, 25);
+                    animateCounter(stat3, 10000);
+                    animateCounter(stat4, 98);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe the stats container
+        const statsContainer = document.querySelector('.grid.grid-cols-2.md\\:grid-cols-4.gap-6');
+        if (statsContainer) {
+            observer.observe(statsContainer);
+        }
+    </script>
+
+</body></html>
